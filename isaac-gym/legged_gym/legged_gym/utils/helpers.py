@@ -38,7 +38,7 @@ from isaacgym import gymapi
 from isaacgym import gymutil
 import torch
 
-from legged_gym.envs.base.legged_robot_config import (
+from legged_gym.base.legged_robot_config import (
     LeggedRobotCfg,
     LeggedRobotCfgPPO,
 )

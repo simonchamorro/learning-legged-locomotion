@@ -28,7 +28,7 @@
 #
 # Copyright (c) 2021 ETH Zurich, Nikita Rudin
 
-from legged_gym.envs.base.legged_robot_config import LeggedRobotCfg, LeggedRobotCfgPPO
+from legged_gym.base.legged_robot_config import LeggedRobotCfg, LeggedRobotCfgPPO
 from legged_gym.envs.go1.go1_config import Go1FlatCfg, Go1FlatCfgPPO, Go1Cfg, Go1CfgPPO
 
 # Action repeat

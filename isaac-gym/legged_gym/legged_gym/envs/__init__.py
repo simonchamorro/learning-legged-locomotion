@@ -30,7 +30,7 @@
 
 from legged_gym import LEGGED_GYM_ROOT_DIR, LEGGED_GYM_ENVS_DIR
 from legged_gym.envs.a1.a1_config import A1RoughCfg, A1RoughCfgPPO
-from .base.legged_robot import LeggedRobot
+from legged_gym.base.legged_robot import LeggedRobot
 from .anymal_c.anymal import Anymal
 from .anymal_c.mixed_terrains.anymal_c_rough_config import AnymalCRoughCfg, AnymalCRoughCfgPPO
 from .anymal_c.flat.anymal_c_flat_config import AnymalCFlatCfg, AnymalCFlatCfgPPO
