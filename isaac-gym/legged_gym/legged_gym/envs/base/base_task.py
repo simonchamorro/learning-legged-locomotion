@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2021 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: BSD-3-Clause
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #
@@ -35,9 +35,8 @@ import numpy as np
 import torch
 
 # Base class for RL tasks
-class BaseTask():
-
-    def __init__(self, cfg, sim_params, physics_engine, sim_device, headless):
+class BaseTask:
+    def __init__(self, cfg, sim_params, physics_engine, sim_device, headless, use_viewer):
         self.gym = gymapi.acquire_gym()
 
         self.sim_params = sim_params
@@ -45,12 +44,13 @@ class BaseTask():
         self.sim_device = sim_device
         sim_device_type, self.sim_device_id = gymutil.parse_device_str(self.sim_device)
         self.headless = headless
+        self.use_viewer = use_viewer
 
         # env device is GPU only if sim is on GPU and use_gpu_pipeline=True, otherwise returned tensors are copied to CPU by physX.
-        if sim_device_type=='cuda' and sim_params.use_gpu_pipeline:
+        if sim_device_type == "cuda" and sim_params.use_gpu_pipeline:
             self.device = self.sim_device
         else:
-            self.device = 'cpu'
+            self.device = "cpu"
 
         # graphics device for rendering, -1 for no rendering
         self.graphics_device_id = self.sim_device_id
@@ -58,6 +58,7 @@ class BaseTask():
             self.graphics_device_id = -1
 
         self.num_envs = cfg.env.num_envs
+        self.rollouts_per_env = cfg.env.rollouts_per_env
         self.num_obs = cfg.env.num_observations
         self.num_privileged_obs = cfg.env.num_privileged_obs
         self.num_actions = cfg.env.num_actions
@@ -68,13 +69,19 @@ class BaseTask():
 
         # allocate buffers
         self.obs_buf = torch.zeros(self.num_envs, self.num_obs, device=self.device, dtype=torch.float)
+        self.img_buf = None
         self.rew_buf = torch.zeros(self.num_envs, device=self.device, dtype=torch.float)
         self.reset_buf = torch.ones(self.num_envs, device=self.device, dtype=torch.long)
         self.episode_length_buf = torch.zeros(self.num_envs, device=self.device, dtype=torch.long)
         self.time_out_buf = torch.zeros(self.num_envs, device=self.device, dtype=torch.bool)
         if self.num_privileged_obs is not None:
-            self.privileged_obs_buf = torch.zeros(self.num_envs, self.num_privileged_obs, device=self.device, dtype=torch.float)
-        else: 
+            self.privileged_obs_buf = torch.zeros(
+                self.num_envs,
+                self.num_privileged_obs,
+                device=self.device,
+                dtype=torch.float,
+            )
+        else:
             self.privileged_obs_buf = None
             # self.num_privileged_obs = self.num_obs
 
@@ -89,18 +96,18 @@ class BaseTask():
         self.viewer = None
 
         # if running with a viewer, set up keyboard shortcuts and camera
-        if self.headless == False:
+        if not self.headless and self.use_viewer:
             # subscribe to keyboard shortcuts
-            self.viewer = self.gym.create_viewer(
-                self.sim, gymapi.CameraProperties())
-            self.gym.subscribe_viewer_keyboard_event(
-                self.viewer, gymapi.KEY_ESCAPE, "QUIT")
-            self.gym.subscribe_viewer_keyboard_event(
-                self.viewer, gymapi.KEY_V, "toggle_viewer_sync")
+            self.viewer = self.gym.create_viewer(self.sim, gymapi.CameraProperties())
+            self.gym.subscribe_viewer_keyboard_event(self.viewer, gymapi.KEY_ESCAPE, "QUIT")
+            self.gym.subscribe_viewer_keyboard_event(self.viewer, gymapi.KEY_V, "toggle_viewer_sync")
 
     def get_observations(self):
-        return self.obs_buf
-    
+        obs = {"state_obs": self.obs_buf}
+        if self.img_buf is not None:
+            obs["img_obs"] = self.img_buf
+        return obs
+
     def get_privileged_observations(self):
         return self.privileged_obs_buf
 
@@ -109,9 +116,11 @@ class BaseTask():
         raise NotImplementedError
 
     def reset(self):
-        """ Reset all robots"""
+        """Reset all robots"""
         self.reset_idx(torch.arange(self.num_envs, device=self.device))
-        obs, privileged_obs, _, _, _ = self.step(torch.zeros(self.num_envs, self.num_actions, device=self.device, requires_grad=False))
+        obs, privileged_obs, _, _, _ = self.step(
+            torch.zeros(self.num_envs, self.num_actions, device=self.device, requires_grad=False)
+        )
         return obs, privileged_obs
 
     def step(self, actions):
@@ -131,7 +140,7 @@ class BaseTask():
                     self.enable_viewer_sync = not self.enable_viewer_sync
 
             # fetch results
-            if self.device != 'cpu':
+            if self.device != "cpu":
                 self.gym.fetch_results(self.sim, True)
 
             # step graphics

@@ -1,0 +1,620 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.12.10
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    python_version: 3.8.13
+    start_time: 1650988553
+    t:
+      1:
+      - 1
+      2:
+      - 1
+      3:
+      - 16
+      4: 3.8.13
+      5: 0.12.10
+      8:
+      - 5
+algorithm_clip_param:
+  desc: null
+  value: 0.2
+algorithm_desired_kl:
+  desc: null
+  value: 0.01
+algorithm_entropy_coef:
+  desc: null
+  value: 0.01
+algorithm_gamma:
+  desc: null
+  value: 0.99
+algorithm_lam:
+  desc: null
+  value: 0.95
+algorithm_learning_rate:
+  desc: null
+  value: 0.001
+algorithm_max_grad_norm:
+  desc: null
+  value: 1.0
+algorithm_num_learning_epochs:
+  desc: null
+  value: 5
+algorithm_num_mini_batches:
+  desc: null
+  value: 4
+algorithm_schedule:
+  desc: null
+  value: adaptive
+algorithm_use_clipped_value_loss:
+  desc: null
+  value: true
+algorithm_value_loss_coef:
+  desc: null
+  value: 1.0
+env_asset_angular_damping:
+  desc: null
+  value: 0.0
+env_asset_armature:
+  desc: null
+  value: 0.0
+env_asset_collapse_fixed_joints:
+  desc: null
+  value: true
+env_asset_default_dof_drive_mode:
+  desc: null
+  value: 3
+env_asset_density:
+  desc: null
+  value: 0.001
+env_asset_disable_gravity:
+  desc: null
+  value: false
+env_asset_file:
+  desc: null
+  value: '{LEGGED_GYM_ROOT_DIR}/resources/robots/anymal_c/urdf/anymal_c.urdf'
+env_asset_fix_base_link:
+  desc: null
+  value: false
+env_asset_flip_visual_attachments:
+  desc: null
+  value: true
+env_asset_foot_name:
+  desc: null
+  value: FOOT
+env_asset_linear_damping:
+  desc: null
+  value: 0.0
+env_asset_max_angular_velocity:
+  desc: null
+  value: 1000.0
+env_asset_max_linear_velocity:
+  desc: null
+  value: 1000.0
+env_asset_name:
+  desc: null
+  value: anymal_c
+env_asset_penalize_contacts_on:
+  desc: null
+  value:
+  - SHANK
+  - THIGH
+env_asset_replace_cylinder_with_capsule:
+  desc: null
+  value: true
+env_asset_self_collisions:
+  desc: null
+  value: 0
+env_asset_terminate_after_contacts_on:
+  desc: null
+  value:
+  - base
+env_asset_thickness:
+  desc: null
+  value: 0.01
+env_commands_curriculum:
+  desc: null
+  value: false
+env_commands_heading_command:
+  desc: null
+  value: false
+env_commands_max_curriculum:
+  desc: null
+  value: 1.0
+env_commands_num_commands:
+  desc: null
+  value: 4
+env_commands_ranges_ang_vel_yaw:
+  desc: null
+  value:
+  - -1.5
+  - 1.5
+env_commands_ranges_heading:
+  desc: null
+  value:
+  - -3.14
+  - 3.14
+env_commands_ranges_lin_vel_x:
+  desc: null
+  value:
+  - -1.0
+  - 1.0
+env_commands_ranges_lin_vel_y:
+  desc: null
+  value:
+  - -1.0
+  - 1.0
+env_commands_resampling_time:
+  desc: null
+  value: 4.0
+env_control_action_scale:
+  desc: null
+  value: 0.5
+env_control_actuator_net_file:
+  desc: null
+  value: '{LEGGED_GYM_ROOT_DIR}/resources/actuator_nets/anydrive_v3_lstm.pt'
+env_control_control_type:
+  desc: null
+  value: P
+env_control_damping_HAA:
+  desc: null
+  value: 2.0
+env_control_damping_HFE:
+  desc: null
+  value: 2.0
+env_control_damping_KFE:
+  desc: null
+  value: 2.0
+env_control_decimation:
+  desc: null
+  value: 4
+env_control_stiffness_HAA:
+  desc: null
+  value: 80.0
+env_control_stiffness_HFE:
+  desc: null
+  value: 80.0
+env_control_stiffness_KFE:
+  desc: null
+  value: 80.0
+env_control_use_actuator_network:
+  desc: null
+  value: true
+env_domain_rand_added_mass_range:
+  desc: null
+  value:
+  - -5.0
+  - 5.0
+env_domain_rand_friction_range:
+  desc: null
+  value:
+  - 0.0
+  - 1.5
+env_domain_rand_max_push_vel_xy:
+  desc: null
+  value: 1.0
+env_domain_rand_push_interval_s:
+  desc: null
+  value: 15
+env_domain_rand_push_robots:
+  desc: null
+  value: true
+env_domain_rand_randomize_base_mass:
+  desc: null
+  value: true
+env_domain_rand_randomize_friction:
+  desc: null
+  value: true
+env_env_env_spacing:
+  desc: null
+  value: 3.0
+env_env_episode_length_s:
+  desc: null
+  value: 20
+env_env_num_actions:
+  desc: null
+  value: 12
+env_env_num_envs:
+  desc: null
+  value: 4096
+env_env_num_observations:
+  desc: null
+  value: 48
+env_env_num_privileged_obs:
+  desc: null
+  value: null
+env_env_send_timeouts:
+  desc: null
+  value: true
+env_init_state_ang_vel:
+  desc: null
+  value:
+  - 0.0
+  - 0.0
+  - 0.0
+env_init_state_default_joint_angles_LF_HAA:
+  desc: null
+  value: 0.0
+env_init_state_default_joint_angles_LF_HFE:
+  desc: null
+  value: 0.4
+env_init_state_default_joint_angles_LF_KFE:
+  desc: null
+  value: -0.8
+env_init_state_default_joint_angles_LH_HAA:
+  desc: null
+  value: 0.0
+env_init_state_default_joint_angles_LH_HFE:
+  desc: null
+  value: -0.4
+env_init_state_default_joint_angles_LH_KFE:
+  desc: null
+  value: 0.8
+env_init_state_default_joint_angles_RF_HAA:
+  desc: null
+  value: -0.0
+env_init_state_default_joint_angles_RF_HFE:
+  desc: null
+  value: 0.4
+env_init_state_default_joint_angles_RF_KFE:
+  desc: null
+  value: -0.8
+env_init_state_default_joint_angles_RH_HAA:
+  desc: null
+  value: -0.0
+env_init_state_default_joint_angles_RH_HFE:
+  desc: null
+  value: -0.4
+env_init_state_default_joint_angles_RH_KFE:
+  desc: null
+  value: 0.8
+env_init_state_lin_vel:
+  desc: null
+  value:
+  - 0.0
+  - 0.0
+  - 0.0
+env_init_state_pos:
+  desc: null
+  value:
+  - 0.0
+  - 0.0
+  - 0.6
+env_init_state_rot:
+  desc: null
+  value:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+env_noise_add_noise:
+  desc: null
+  value: true
+env_noise_noise_level:
+  desc: null
+  value: 1.0
+env_noise_noise_scales_ang_vel:
+  desc: null
+  value: 0.2
+env_noise_noise_scales_dof_pos:
+  desc: null
+  value: 0.01
+env_noise_noise_scales_dof_vel:
+  desc: null
+  value: 1.5
+env_noise_noise_scales_gravity:
+  desc: null
+  value: 0.05
+env_noise_noise_scales_height_measurements:
+  desc: null
+  value: 0.1
+env_noise_noise_scales_lin_vel:
+  desc: null
+  value: 0.1
+env_normalization_clip_actions:
+  desc: null
+  value: 100.0
+env_normalization_clip_observations:
+  desc: null
+  value: 100.0
+env_normalization_obs_scales_ang_vel:
+  desc: null
+  value: 0.25
+env_normalization_obs_scales_dof_pos:
+  desc: null
+  value: 1.0
+env_normalization_obs_scales_dof_vel:
+  desc: null
+  value: 0.05
+env_normalization_obs_scales_height_measurements:
+  desc: null
+  value: 5.0
+env_normalization_obs_scales_lin_vel:
+  desc: null
+  value: 2.0
+env_rewards_base_height_target:
+  desc: null
+  value: 0.5
+env_rewards_max_contact_force:
+  desc: null
+  value: 350.0
+env_rewards_only_positive_rewards:
+  desc: null
+  value: true
+env_rewards_scales_action_rate:
+  desc: null
+  value: -0.01
+env_rewards_scales_ang_vel_xy:
+  desc: null
+  value: -0.05
+env_rewards_scales_base_height:
+  desc: null
+  value: -0.0
+env_rewards_scales_collision:
+  desc: null
+  value: -1.0
+env_rewards_scales_dof_acc:
+  desc: null
+  value: -2.5e-07
+env_rewards_scales_dof_vel:
+  desc: null
+  value: -0.0
+env_rewards_scales_feet_air_time:
+  desc: null
+  value: 2.0
+env_rewards_scales_feet_stumble:
+  desc: null
+  value: -0.0
+env_rewards_scales_lin_vel_z:
+  desc: null
+  value: -2.0
+env_rewards_scales_orientation:
+  desc: null
+  value: -5.0
+env_rewards_scales_stand_still:
+  desc: null
+  value: -0.0
+env_rewards_scales_termination:
+  desc: null
+  value: -0.0
+env_rewards_scales_torques:
+  desc: null
+  value: -2.5e-05
+env_rewards_scales_tracking_ang_vel:
+  desc: null
+  value: 0.5
+env_rewards_scales_tracking_lin_vel:
+  desc: null
+  value: 1.0
+env_rewards_soft_dof_pos_limit:
+  desc: null
+  value: 1.0
+env_rewards_soft_dof_vel_limit:
+  desc: null
+  value: 1.0
+env_rewards_soft_torque_limit:
+  desc: null
+  value: 1.0
+env_rewards_tracking_sigma:
+  desc: null
+  value: 0.25
+env_seed:
+  desc: null
+  value: 1
+env_sim_dt:
+  desc: null
+  value: 0.005
+env_sim_gravity:
+  desc: null
+  value:
+  - 0.0
+  - 0.0
+  - -9.81
+env_sim_physx_bounce_threshold_velocity:
+  desc: null
+  value: 0.5
+env_sim_physx_contact_collection:
+  desc: null
+  value: 2
+env_sim_physx_contact_offset:
+  desc: null
+  value: 0.01
+env_sim_physx_default_buffer_size_multiplier:
+  desc: null
+  value: 5
+env_sim_physx_max_depenetration_velocity:
+  desc: null
+  value: 1.0
+env_sim_physx_max_gpu_contact_pairs:
+  desc: null
+  value: 8388608
+env_sim_physx_num_position_iterations:
+  desc: null
+  value: 4
+env_sim_physx_num_threads:
+  desc: null
+  value: 10
+env_sim_physx_num_velocity_iterations:
+  desc: null
+  value: 0
+env_sim_physx_rest_offset:
+  desc: null
+  value: 0.0
+env_sim_physx_solver_type:
+  desc: null
+  value: 1
+env_sim_substeps:
+  desc: null
+  value: 1
+env_sim_up_axis:
+  desc: null
+  value: 1
+env_terrain_border_size:
+  desc: null
+  value: 25
+env_terrain_curriculum:
+  desc: null
+  value: true
+env_terrain_dynamic_friction:
+  desc: null
+  value: 1.0
+env_terrain_horizontal_scale:
+  desc: null
+  value: 0.1
+env_terrain_max_init_terrain_level:
+  desc: null
+  value: 5
+env_terrain_measure_heights:
+  desc: null
+  value: false
+env_terrain_measured_points_x:
+  desc: null
+  value:
+  - -0.8
+  - -0.7
+  - -0.6
+  - -0.5
+  - -0.4
+  - -0.3
+  - -0.2
+  - -0.1
+  - 0.0
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.5
+  - 0.6
+  - 0.7
+  - 0.8
+env_terrain_measured_points_y:
+  desc: null
+  value:
+  - -0.5
+  - -0.4
+  - -0.3
+  - -0.2
+  - -0.1
+  - 0.0
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.5
+env_terrain_mesh_type:
+  desc: null
+  value: plane
+env_terrain_num_cols:
+  desc: null
+  value: 20
+env_terrain_num_rows:
+  desc: null
+  value: 10
+env_terrain_restitution:
+  desc: null
+  value: 0.0
+env_terrain_selected:
+  desc: null
+  value: false
+env_terrain_slope_treshold:
+  desc: null
+  value: 0.75
+env_terrain_static_friction:
+  desc: null
+  value: 1.0
+env_terrain_terrain_kwargs:
+  desc: null
+  value: null
+env_terrain_terrain_length:
+  desc: null
+  value: 8.0
+env_terrain_terrain_proportions:
+  desc: null
+  value:
+  - 0.1
+  - 0.1
+  - 0.35
+  - 0.25
+  - 0.2
+env_terrain_terrain_width:
+  desc: null
+  value: 8.0
+env_terrain_vertical_scale:
+  desc: null
+  value: 0.005
+env_viewer_lookat:
+  desc: null
+  value:
+  - 11.0
+  - 5
+  - 3.0
+env_viewer_pos:
+  desc: null
+  value:
+  - 10
+  - 0
+  - 6
+env_viewer_ref_env:
+  desc: null
+  value: 0
+policy_activation:
+  desc: null
+  value: elu
+policy_actor_hidden_dims:
+  desc: null
+  value:
+  - 128
+  - 64
+  - 32
+policy_critic_hidden_dims:
+  desc: null
+  value:
+  - 128
+  - 64
+  - 32
+policy_init_noise_std:
+  desc: null
+  value: 1.0
+runner_algorithm_class_name:
+  desc: null
+  value: PPO
+runner_checkpoint:
+  desc: null
+  value: -1
+runner_class_name:
+  desc: null
+  value: OnPolicyRunner
+runner_experiment_name:
+  desc: null
+  value: flat_anymal_c
+runner_load_run:
+  desc: null
+  value: -1
+runner_max_iterations:
+  desc: null
+  value: 300
+runner_num_steps_per_env:
+  desc: null
+  value: 24
+runner_policy_class_name:
+  desc: null
+  value: ActorCritic
+runner_resume:
+  desc: null
+  value: false
+runner_resume_path:
+  desc: null
+  value: null
+runner_run_name:
+  desc: null
+  value: ''
+runner_save_interval:
+  desc: null
+  value: 50
+seed:
+  desc: null
+  value: 1

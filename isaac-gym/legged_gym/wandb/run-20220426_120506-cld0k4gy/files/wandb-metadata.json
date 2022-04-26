@@ -1,0 +1,24 @@
+{
+    "os": "Linux-5.13.0-39-generic-x86_64-with-glibc2.17",
+    "python": "3.8.13",
+    "heartbeatAt": "2022-04-26T16:05:07.997229",
+    "startedAt": "2022-04-26T16:05:06.753424",
+    "docker": null,
+    "gpu": "NVIDIA GeForce GTX 1050 with Max-Q Design",
+    "gpu_count": 1,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "legged_gym/scripts/train.py",
+    "codePath": "isaac-gym/legged_gym/legged_gym/scripts/train.py",
+    "git": {
+        "remote": "git@github.com:simonchamorro/learning-legged-locomotion.git",
+        "commit": "1af8c47c9e6877e8ce676872aed5859f60068389"
+    },
+    "email": "simon.chamorro@usherbrooke.ca",
+    "root": "/home/simon/mila/learning-legged-locomotion",
+    "host": "simon-ZenBook-UX533FD-UX533FD",
+    "username": "simon",
+    "executable": "/home/simon/anaconda3/envs/loco/bin/python"
+}
