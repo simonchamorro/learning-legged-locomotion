@@ -82,4 +82,20 @@ class A1RoughCfgPPO( LeggedRobotCfgPPO ):
         run_name = ''
         experiment_name = 'rough_a1'
 
+class A1FlatCfg(A1RoughCfg):
+    class env(A1RoughCfg.env):
+        num_observations = 48
+
+    class terrain( A1RoughCfg.terrain ):
+        mesh_type = 'plane'
+        measure_heights = False
+
+class A1FlatCfgPPO(LeggedRobotCfgPPO):
+    class algorithm(LeggedRobotCfgPPO.algorithm):
+        entropy_coef = 0.01
+
+    class runner(LeggedRobotCfgPPO.runner):
+        run_name = ""
+        experiment_name = "a1_flat"
+        max_iterations = 500
   
