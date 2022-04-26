@@ -60,6 +60,8 @@ class BaseTask:
         self.num_envs = cfg.env.num_envs
         self.rollouts_per_env = cfg.env.rollouts_per_env
         self.num_obs = cfg.env.num_observations
+        self.img_dims = cfg.env.img_dims
+        self.use_images = cfg.env.use_images
         self.num_privileged_obs = cfg.env.num_privileged_obs
         self.num_actions = cfg.env.num_actions
 
@@ -70,6 +72,8 @@ class BaseTask:
         # allocate buffers
         self.obs_buf = torch.zeros(self.num_envs, self.num_obs, device=self.device, dtype=torch.float)
         self.img_buf = None
+        if self.use_images:
+            self.img_buf = torch.zeros(self.num_envs, *self.img_dims, device=self.device, dtype=torch.uint8)
         self.rew_buf = torch.zeros(self.num_envs, device=self.device, dtype=torch.float)
         self.reset_buf = torch.ones(self.num_envs, device=self.device, dtype=torch.long)
         self.episode_length_buf = torch.zeros(self.num_envs, device=self.device, dtype=torch.long)

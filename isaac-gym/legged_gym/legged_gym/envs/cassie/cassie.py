@@ -28,15 +28,7 @@
 #
 # Copyright (c) 2021 ETH Zurich, Nikita Rudin
 
-from time import time
-import numpy as np
-import os
-
-from isaacgym.torch_utils import *
-from isaacgym import gymtorch, gymapi, gymutil
-
 import torch
-from typing import Tuple, Dict
 from legged_gym.envs import LeggedRobot
 
 class Cassie(LeggedRobot):

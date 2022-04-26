@@ -28,8 +28,8 @@
 #
 # Copyright (c) 2021 ETH Zurich, Nikita Rudin
 
-from pupperfetch.legged_gym.base.legged_robot_config import LeggedRobotCfg, LeggedRobotCfgPPO
-from pupperfetch.legged_gym.envs.go1.go1_config import Go1FlatCfg, Go1FlatCfgPPO, Go1Cfg, Go1CfgPPO
+from legged_gym.envs.base.legged_robot_config import LeggedRobotCfg, LeggedRobotCfgPPO
+from legged_gym.envs.go1.go1_config import Go1FlatCfg, Go1FlatCfgPPO, Go1Cfg, Go1CfgPPO
 
 # Action repeat
 class Go1FlatCfg1(Go1FlatCfg):

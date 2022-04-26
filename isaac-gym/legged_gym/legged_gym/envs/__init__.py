@@ -39,6 +39,8 @@ from .cassie.cassie import Cassie
 from .cassie.cassie_config import CassieRoughCfg, CassieRoughCfgPPO
 from .a1.a1_config import A1RoughCfg, A1RoughCfgPPO, A1FlatCfg, A1FlatCfgPPO
 from .go1.go1_config import Go1Cfg, Go1CfgPPO, Go1FlatCfg, Go1FlatCfgPPO
+from .pupper.pupper_config import PupperCfg, PupperCfgPPO, PupperFlatCfg, PupperFlatCfgPPO, PupperHighLegMassCfg
+from .pupper.pupper_config import PupperHighLegMassCfg, PupperFlatHighLegMassCfgPPO, PupperA1MassCfg, PupperA1MassCfgPPO, PupperGo1MassCfg, PupperGo1MassCfgPPO
 
 from .go1.go1_env_exps_config import (
     Go1FlatCfg1,
@@ -118,6 +120,11 @@ task_registry.register("a1_flat", LeggedRobot, A1FlatCfg(), A1FlatCfgPPO())
 task_registry.register("cassie", Cassie, CassieRoughCfg(), CassieRoughCfgPPO())
 task_registry.register("go1", LeggedRobot, Go1Cfg(), Go1CfgPPO())
 task_registry.register("go1_flat", LeggedRobot, Go1FlatCfg(), Go1FlatCfgPPO())
+
+task_registry.register("pupper_flat", LeggedRobot, PupperFlatCfg(), PupperFlatCfgPPO())
+task_registry.register("pupper_flat_high_leg_mass", LeggedRobot, PupperHighLegMassCfg(), PupperFlatHighLegMassCfgPPO())
+task_registry.register("pupper_flat_a1_mass", LeggedRobot, PupperA1MassCfg(), PupperA1MassCfgPPO())
+task_registry.register("pupper_flat_go1_mass", LeggedRobot, PupperGo1MassCfg(), PupperGo1MassCfgPPO())
 
 task_registry.register("go1_flat_repeat1", LeggedRobot, Go1FlatCfg1(), Go1FlatCfgPPO1())
 task_registry.register("go1_flat_repeat2", LeggedRobot, Go1FlatCfg2(), Go1FlatCfgPPO2())

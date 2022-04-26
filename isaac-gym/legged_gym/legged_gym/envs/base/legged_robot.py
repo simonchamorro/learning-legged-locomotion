@@ -41,7 +41,7 @@ from legged_gym.envs.base.base_task import BaseTask
 from legged_gym.utils.terrain import Terrain
 from legged_gym.utils.math import quat_apply_yaw, wrap_to_pi
 from legged_gym.utils.helpers import class_to_dict
-from legged_gym.envs.base.legged_robot_config import LeggedRobotCfg
+from .legged_robot_config import LeggedRobotCfg
 
 
 class LeggedRobot(BaseTask):
@@ -100,6 +100,7 @@ class LeggedRobot(BaseTask):
         #     requires_grad=False,
         # )
 
+        # breakpoint()
         # step physics and render each frame
         self.render()
         for _ in range(self.cfg.control.decimation):
@@ -240,6 +241,43 @@ class LeggedRobot(BaseTask):
     def compute_observations(self):
         """Computes observations"""
 
+        # a1 w/o arm
+        # self.base_lin_vel * self.obs_scales.lin_vel torch.Size([4096, 3])
+        # self.base_ang_vel * self.obs_scales.ang_vel torch.Size([4096, 3])
+        # self.projected_gravity torch.Size([4096, 3])
+        # self.commands[:, :3] * self.commands_scale[:3] torch.Size([4096, 3])
+        # (self.dof_pos - self.default_dof_pos) * self.obs_scales.dof_pos torch.Size([4096, 12])
+        # self.dof_vel * self.obs_scales.dof_vel torch.Size([4096, 12])
+        # self.actions torch.Size([4096, 12])
+
+        # a1 w/ arm
+        # self.base_lin_vel * self.obs_scales.lin_vel torch.Size([4096, 3])
+        # self.base_ang_vel * self.obs_scales.ang_vel torch.Size([4096, 3])
+        # self.projected_gravity torch.Size([4096, 3])
+        # self.commands[:, :3] * self.commands_scale[:3] torch.Size([4096, 3])
+        # (self.dof_pos - self.default_dof_pos) * self.obs_scales.dof_pos torch.Size([4096, 15])
+        # self.dof_vel * self.obs_scales.dof_vel torch.Size([4096, 15])
+        # self.actions torch.Size([4096, 15])
+
+        # a1 w/a w/o movement
+        # self.base_lin_vel * self.obs_scales.lin_vel torch.Size([9, 3])
+        # self.base_ang_vel * self.obs_scales.ang_vel torch.Size([9, 3])
+        # self.projected_gravity torch.Size([9, 3])
+        # self.commands[:, :3] * self.commands_scale[:3] torch.Size([9, 3])
+        # (self.dof_pos - self.default_dof_pos) * self.obs_scales.dof_pos torch.Size([9, 15])
+        # self.dof_vel * self.obs_scales.dof_vel torch.Size([9, 15])
+        # self.actions torch.Size([9, 15])
+
+        # observed_actions_tmp = 12
+        # obs = [
+        #     self.base_lin_vel * self.obs_scales.lin_vel,
+        #     self.base_ang_vel * self.obs_scales.ang_vel,
+        #     self.projected_gravity,
+        #     self.commands[:, :3] * self.commands_scale[:3],
+        #     ((self.dof_pos - self.default_dof_pos) * self.obs_scales.dof_pos)[:, :observed_actions_tmp],
+        #     (self.dof_vel * self.obs_scales.dof_vel)[:, :observed_actions_tmp],
+        #     self.actions[:, :observed_actions_tmp],
+        # ]
         obs = [
             self.base_lin_vel * self.obs_scales.lin_vel,
             self.base_ang_vel * self.obs_scales.ang_vel,
@@ -249,6 +287,14 @@ class LeggedRobot(BaseTask):
             (self.dof_vel * self.obs_scales.dof_vel),
             self.actions,
         ]
+
+        if self.cfg.commands.with_arm:
+            obs.append(self.gripper_lin_vel * self.obs_scales.lin_vel_arm)
+            obs.append(self.commands[:, 4:] * self.commands_scale[4:])
+        self.obs_buf = torch.cat(
+            obs,
+            dim=-1,
+        )
 
         # add perceptive inputs if not blind
         if self.cfg.terrain.measure_heights:
@@ -473,6 +519,29 @@ class LeggedRobot(BaseTask):
             self.commands[env_ids, 2] = torch_rand_float(
                 self.command_ranges["ang_vel_yaw"][0],
                 self.command_ranges["ang_vel_yaw"][1],
+                (len(env_ids), 1),
+                device=self.device,
+            ).squeeze(1)
+        if self.cfg.commands.with_arm:
+
+            # TODO: this needs to be capped at the arm's max position (maybe do this in the reward calc) ======
+            #  ================================================================================================
+
+            self.commands[env_ids, 4] = torch_rand_float(
+                self.command_ranges["lin_vel_arm_x"][0],
+                self.command_ranges["lin_vel_arm_x"][1],
+                (len(env_ids), 1),
+                device=self.device,
+            ).squeeze(1)
+            self.commands[env_ids, 5] = torch_rand_float(
+                self.command_ranges["lin_vel_arm_y"][0],
+                self.command_ranges["lin_vel_arm_y"][1],
+                (len(env_ids), 1),
+                device=self.device,
+            ).squeeze(1)
+            self.commands[env_ids, 6] = torch_rand_float(
+                self.command_ranges["lin_vel_arm_z"][0],
+                self.command_ranges["lin_vel_arm_z"][1],
                 (len(env_ids), 1),
                 device=self.device,
             ).squeeze(1)
@@ -723,7 +792,12 @@ class LeggedRobot(BaseTask):
             self.obs_scales.ang_vel,
             1,
         ]
-
+        if hasattr(self.obs_scales, "lin_vel_arm"):
+            scales += [
+                self.obs_scales.lin_vel_arm,
+                self.obs_scales.lin_vel_arm,
+                self.obs_scales.lin_vel_arm,
+            ]
         self.commands_scale = torch.tensor(scales, device=self.device, requires_grad=False)
         self.feet_air_time = torch.zeros(
             self.num_envs,
@@ -1215,6 +1289,17 @@ class LeggedRobot(BaseTask):
         # Tracking of linear velocity commands (xy axes)
         lin_vel_error = torch.sum(torch.square(self.commands[:, :2] - self.base_lin_vel[:, :2]), dim=1)
         return torch.exp(-lin_vel_error / self.cfg.rewards.tracking_sigma)
+
+    def _reward_tracking_lin_vel_arm(self):
+        # Tracking of linear velocity commands (xyz axes) of arm end effector
+
+        # TODO set this to zero when arm reaches max extension =========================================
+        #  =============================================================================================
+
+        lin_vel_error = torch.sum(torch.square(self.commands[:, 4:7] - self.gripper_lin_vel[:, :3]), dim=1)
+        err = torch.exp(-lin_vel_error / self.cfg.rewards.tracking_sigma_arm)
+        # print(err)
+        return err
 
     def _reward_tracking_ang_vel(self):
         # Tracking of angular velocity commands (yaw)
