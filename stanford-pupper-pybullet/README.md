@@ -13,7 +13,7 @@ See the report for more details.
   <img src="../imgs/flying-pupper.png" width="250" /> 
 </p>
 
-## Our scripts
+## Our Scripts
 
 First, we added an Encoders class and an IMU class, in `sim` to simulate the same observations that the robot would have in the real world. 
 Then, we refactored the simulation from the original repo to allow more flexibiliy and be able to run either the hard-coded gait or our learned policy.
