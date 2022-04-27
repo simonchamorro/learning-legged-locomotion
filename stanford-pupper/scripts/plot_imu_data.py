@@ -17,7 +17,10 @@ for t in time:
         x_gt.append(0.0)
 
 plt.figure()
+plt.title("Velocity Estimation from IMU")
 plt.plot(time, x_kalman, label='kalman')
 plt.plot(time, x_gt, label='approx gt')
+plt.xlabel("Time [s]")
+plt.ylabel("X Velocity [m/s]")
 plt.legend()
 plt.show()

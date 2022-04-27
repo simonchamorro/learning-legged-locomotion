@@ -57,10 +57,10 @@ def build_plot(title, x_label, y_label, x_datas, y_datas, run_labels, to_img=Fal
     assert len(x_datas) == len(y_datas), 'x_datas need to have the number of run than y_datas'
     assert (len(x_datas) == len(run_labels)) or  len(run_labels) == 0, 'you need to provide all the run labels or none of them !'
 
-    figure(figsize=(12, 10), dpi=100)
+    figure(figsize=(10, 8), dpi=100)
     
     # Add title
-    plt.title(title, fontsize=40, pad=30)
+    plt.title(title, fontsize=35, pad=30)
 
     # Add the grid
     plt.grid(True, linestyle=':', alpha=0.9)
@@ -77,11 +77,11 @@ def build_plot(title, x_label, y_label, x_datas, y_datas, run_labels, to_img=Fal
         else:
             label = run_labels[idx]
         y = smooth_data(y, 5)
-        plt.plot(x[:-2], y[:-2], label=label, alpha=0.7)
+        plt.plot(x[:-2], y[:-2], label=label, alpha=1.0)
 
     # Add the legend
     if len(run_labels) >= 1:
-        plt.legend(loc='upper left')
+        plt.legend(loc='upper left', fontsize=13)
 
     # Save plot
     if to_img:
