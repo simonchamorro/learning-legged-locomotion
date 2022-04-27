@@ -3,7 +3,7 @@
 In this folder, we have all the code to train locomotion policies in Isaac Gym. 
 Refer to [rsl_rl](https://github.com/leggedrobotics/rsl_rl) and [legged_gym](https://github.com/leggedrobotics/legged_gym) for the original repositories. 
 We adapted the code to our needs, added wandb logging, and experimented with image observations. 
-See our [wand report](https://wandb.ai/simonchamorro/legged-gym/reports/Legged-Locomotion-Environment-Experiments-in-Isaac-Gym--VmlldzoxODE2MDY0?accessToken=1110hptvwz8q5zo6gfn4cu6w0348hbped21qtljo0huikqchumsp85czyrxlaey6) for a study of this locomotion task.
+See our [wandb report](https://wandb.ai/simonchamorro/legged-gym/reports/Legged-Locomotion-Environment-Experiments-in-Isaac-Gym--VmlldzoxODE2MDY0?accessToken=1110hptvwz8q5zo6gfn4cu6w0348hbped21qtljo0huikqchumsp85czyrxlaey6) for a study of this locomotion task.
 We also added our robot models and trained locomotion policies for them.
 
 
