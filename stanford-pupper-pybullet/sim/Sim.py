@@ -37,7 +37,7 @@ class Pupper(Robot):
         self.default_yaw_rate = 0.0
         self.action_size = 12
         self.observation_size = 48
-        self.default_velocity = torch.zeros((2,))
+        self.default_velocity = np.array([0.1, 0.0])
 
         # Default methods
         self.init_robot_values()
@@ -109,12 +109,12 @@ class PupperSim(Sim):
     by overiding methods.
     """
 
-    def __init__(self,xml_path, policy_path=None, *args, **kwargs):
+    def __init__(self,xml_path, use_policy=False, policy_path=None, *args, **kwargs):
         super().__init__(xml_path, *args, **kwargs)
 
         print("******* Building Default Stanford-Pupper simulation ******")
         self.policy = None
-        self.use_policy = policy_path is not None
+        self.use_policy = use_policy
         self.config = Configuration()
         self.interface = HardwareInterface(self.model, self.joint_indices)
         self.robot = Pupper(self.config)

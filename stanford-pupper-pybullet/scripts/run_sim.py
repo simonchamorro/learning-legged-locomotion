@@ -14,11 +14,11 @@ import torch.functional as F
 import os
 import glob
 
-def main(default_velocity=np.zeros(2), default_yaw_rate=0.0, policy_path=None, use_policy=True):
+def main(default_velocity=np.zeros(2), default_yaw_rate=0.0, policy_path=None, use_policy=False):
     # Create Simulation
-    sim = PupperSim(xml_path="sim/pupper_pybullet_out.xml", policy_path=policy_path)
+    sim = PupperSim(xml_path="sim/pupper_pybullet_out.xml", policy_path=policy_path, use_policy=use_policy)
     # Run it
     sim.run(verbose=True)
 
 if __name__ == "__main__":
-    main(policy_path=extract_last_model_save("./policy/pupper/*"), use_policy=True)
+    main(policy_path=extract_last_model_save("./policy/pupper/*"), use_policy=False)
