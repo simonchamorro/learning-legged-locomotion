@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-isaac-gym/legged_gym/wandb/*
+isaac-gym/legged_gym/wandb/**
 
 # C extensions
 *.so
