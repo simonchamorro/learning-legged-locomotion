@@ -18,7 +18,7 @@ policy = nn.Sequential(nn.Linear(48, 512),
                        nn.Linear(128, 12))
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(('127.0.0.1', 1245))
+s.connect(('192.168.100.163', 1245))
 
 full_msg = b''
 new_msg = True

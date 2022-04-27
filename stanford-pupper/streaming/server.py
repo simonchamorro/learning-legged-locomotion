@@ -9,7 +9,7 @@ HEADERSIZE = 10
 reply = False
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((socket.gethostname(), 1245))
+s.bind(("192.168.100.163", 1245))
 s.listen(5)
 
 while True:
