@@ -21,4 +21,4 @@ def main(default_velocity=np.zeros(2), default_yaw_rate=0.0, policy_path=None, u
     sim.run(verbose=True)
 
 if __name__ == "__main__":
-    main(policy_path=extract_last_model_save("./policy/pupper/*"), use_policy=False)
+    main(policy_path=extract_last_model_save("./policy/pupper/*"), use_policy=True)
